@@ -14,7 +14,8 @@ import java.util.List;
 public interface ArticleDtoMapper {
     ArticleDtoMapper MAPPER = Mappers.getMapper(ArticleDtoMapper.class);
     @Mapping(source = "tags", target = "tags")
-    Article toModel(CreateArticleRequest articleRequest, Integer wordNumbers, List<Tag> tags);
+    @Mapping(source = "html",target = "content")
+    Article toModel(CreateArticleRequest articleRequest, String html, Integer wordNumbers, List<Tag> tags);
 
 
 

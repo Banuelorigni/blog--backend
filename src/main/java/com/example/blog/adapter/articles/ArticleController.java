@@ -36,8 +36,9 @@ public class ArticleController {
     public Article createArticles(@Parameter(description = "info of saving article") @RequestBody @Valid CreateArticleRequest articleRequest) throws TagNotFoundException {
         Integer wordNumbers = articleApplicationService.countWordNumber(articleRequest.getContent());
         List<Tag> tags = tagService.findById(articleRequest.getTags());
+        String html = articleApplicationService.markdownToHtml(articleRequest.getContent());
 
-        Article article = ArticleDtoMapper.MAPPER.toModel(articleRequest, wordNumbers, tags);
+        Article article = ArticleDtoMapper.MAPPER.toModel(articleRequest,html, wordNumbers, tags);
 
         return articleApplicationService.createArticles(article);
     }
