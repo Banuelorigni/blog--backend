@@ -1,5 +1,6 @@
 package com.example.blog.domain.articles;
 
+import com.example.blog.application.articles.exceptions.ArticleNotFoundException;
 import com.example.blog.domain.articles.mapper.ArticleEntityMapper;
 import com.example.blog.infrastructure.articles.ArticlesEntity;
 import lombok.AllArgsConstructor;
@@ -28,6 +29,9 @@ public class ArticleRepositoryProvider implements ArticleRepository {
         PageRequest pageRequest = PageRequest.of(page, size, sortDirection, sortBy);
 
         Page<ArticlesEntity> articlesEntities = jpaArticleRepository.findAll(pageRequest);
+        if (articlesEntities.getTotalElements() == 0){
+            throw new ArticleNotFoundException("Article");
+        }
         List<Article> articles = ArticleEntityMapper.MAPPER.toListModel(articlesEntities);
         return new PageImpl<>(articles,pageRequest,articles.size());
     }

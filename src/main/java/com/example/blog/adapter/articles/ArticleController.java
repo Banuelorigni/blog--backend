@@ -4,6 +4,7 @@ import com.example.blog.adapter.articles.dto.CreateArticleRequest;
 import com.example.blog.adapter.swaggers.GetArticles;
 import com.example.blog.adapter.swaggers.SaveArticles;
 import com.example.blog.application.articles.ArticleApplicationService;
+import com.example.blog.application.articles.exceptions.ArticleNotFoundException;
 import com.example.blog.application.tags.TagService;
 import com.example.blog.application.tags.exceptions.TagNotFoundException;
 import com.example.blog.domain.articles.Article;
@@ -53,7 +54,7 @@ public class ArticleController {
     public Page<Article> getAllArticles(@RequestParam(required = false, defaultValue = "DESC") String orderBy,
                                         @RequestParam(required = false, defaultValue = "createdAt") String sortBy,
                                         @RequestParam(required = false, defaultValue = "0") int page,
-                                        @RequestParam(required = false, defaultValue = "10") int size) {
+                                        @RequestParam(required = false, defaultValue = "10") int size) throws ArticleNotFoundException {
         return articleApplicationService.getAllArticles(orderBy,sortBy,page,size);
     }
 }
