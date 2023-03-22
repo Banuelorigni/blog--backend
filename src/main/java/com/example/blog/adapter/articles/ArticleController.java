@@ -4,6 +4,7 @@ import com.example.blog.adapter.articles.dto.CreateArticleRequest;
 import com.example.blog.adapter.swaggers.SaveArticles;
 import com.example.blog.application.articles.ArticleApplicationService;
 import com.example.blog.application.tags.TagService;
+import com.example.blog.application.tags.exceptions.TagNotFoundException;
 import com.example.blog.domain.articles.Article;
 import com.example.blog.domain.tag.Tag;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -32,10 +33,11 @@ public class ArticleController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @SaveArticles
-    public Article createArticles(@Parameter(description = "info of saving article") @RequestBody @Valid CreateArticleRequest articleRequest) {
+    public Article createArticles(@Parameter(description = "info of saving article") @RequestBody @Valid CreateArticleRequest articleRequest) throws TagNotFoundException {
         Integer wordNumbers = articleApplicationService.countWordNumber(articleRequest.getContent());
-        List<Tag> tags=tagService.findById(articleRequest.getTags());
-        Article article = ArticleDtoMapper.MAPPER.toModel(articleRequest, wordNumbers,tags);
+        List<Tag> tags = tagService.findById(articleRequest.getTags());
+
+        Article article = ArticleDtoMapper.MAPPER.toModel(articleRequest, wordNumbers, tags);
 
         return articleApplicationService.createArticles(article);
     }

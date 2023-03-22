@@ -43,7 +43,7 @@ public class ArticlesEntity extends BaseEntity  {
 
     @Column(name = "cover_url", nullable = false)
     private String coverUrl;
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "articles_tags",
             joinColumns = {
