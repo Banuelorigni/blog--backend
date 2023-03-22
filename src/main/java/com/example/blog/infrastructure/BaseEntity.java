@@ -16,6 +16,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
@@ -27,17 +28,17 @@ public abstract class BaseEntity implements Auditable {
 
     @CreatedDate
     @Column(updatable = false)
-    private Instant createdAt;
+    private Instant createdAt = Instant.now();
 
     @LastModifiedDate
-    private Instant updatedAt;
+    private Instant updatedAt= Instant.now();
 
     @CreatedBy
     @Column(updatable = false)
-    private String createdBy;
+    private String createdBy= "Anonymous";
 
     @LastModifiedBy
-    private String updatedBy;
+    private String updatedBy= "Anonymous";
 
     @Version
     private Integer version = 0;
