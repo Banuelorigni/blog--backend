@@ -6,6 +6,7 @@ import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 
@@ -25,5 +26,9 @@ public class ArticleApplicationService {
         Node document = parser.parse(markdown);
         HtmlRenderer renderer = HtmlRenderer.builder().build();
         return renderer.render(document);
+    }
+
+    public Page<Article> getAllArticles(String orderBy, String sortBy, int page, int size) {
+        return articleRepository.getAllArticles(orderBy,sortBy,page,size);
     }
 }
