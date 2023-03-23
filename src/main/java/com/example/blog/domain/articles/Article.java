@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.Instant;
 import java.util.List;
 
 @Getter
@@ -22,7 +23,7 @@ public class Article {
     private Integer wordNumbers;
 
     private String coverUrl;
-
+    private Instant createdAt;
     private List<Tag> tags;
 
 }
