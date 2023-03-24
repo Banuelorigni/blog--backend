@@ -1,5 +1,6 @@
 package com.example.blog.application.tags;
 
+import com.example.blog.domain.articles.Article;
 import com.example.blog.domain.tag.Tag;
 import com.example.blog.domain.tag.TagRepository;
 import lombok.AllArgsConstructor;
@@ -14,5 +15,9 @@ public class TagApplicationService {
 
     public List<Tag> findAll() {
         return tagRepository.findAll();
+    }
+
+    public List<Article> findArticlesByTagId(Long tagId) {
+        return tagRepository.findById(tagId);
     }
 }

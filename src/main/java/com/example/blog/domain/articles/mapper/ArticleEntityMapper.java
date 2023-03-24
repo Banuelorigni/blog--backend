@@ -19,4 +19,5 @@ public interface ArticleEntityMapper {
 
     List<Article> toListModel(Page<ArticlesEntity> articlesEntities);
 
+    List<Article> toListModel(List<ArticlesEntity> articles);
 }

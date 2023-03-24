@@ -31,8 +31,8 @@ public class TagController {
         return tagApplicationService.findAll();
     }
 
-    @GetMapping("/{tagName}")
-    public List<Article> getArticlesByTag(@PathVariable String tagName) {
-        return null;
+    @GetMapping("/{tagId}")
+    public List<Article> getArticlesByTagId(@PathVariable Long tagId) {
+        return tagApplicationService.findArticlesByTagId(tagId);
     }
 }
