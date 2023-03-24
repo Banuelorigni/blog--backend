@@ -6,6 +6,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface TagEntityMapper {
     TagEntityMapper MAPPER = Mappers.getMapper(TagEntityMapper.class);
@@ -13,4 +15,6 @@ public interface TagEntityMapper {
 
 
     Tag toModel(TagsEntity tagInfo);
+
+    List<Tag> toEntity(List<TagsEntity> tags);
 }

@@ -25,4 +25,9 @@ public class TagRepositoryProvider implements TagRepository{
         List<TagsEntity> tagsEntities = jpaTagRepository.findAllById(tags);
         return tagsEntities.stream().map(TagEntityMapper.MAPPER::toModel).collect(Collectors.toList());
     }
+
+    @Override
+    public List<Tag> findAll() {
+        return TagEntityMapper.MAPPER.toEntity(jpaTagRepository.findAll());
+    }
 }

@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class TagService {
-    private TagRepository tagRepository;
+    private final TagRepository tagRepository;
 
     public List<Tag> findById(List<Long> tags) {
         List<Tag> allTagById = tagRepository.findAllTagById(tags);
