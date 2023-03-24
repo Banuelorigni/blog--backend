@@ -5,12 +5,9 @@ import com.example.blog.domain.articles.mapper.ArticleEntityMapper;
 import com.example.blog.infrastructure.articles.ArticlesEntity;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 @AllArgsConstructor
@@ -32,7 +29,7 @@ public class ArticleRepositoryProvider implements ArticleRepository {
         if (articlesEntities.getTotalElements() == 0){
             throw new ArticleNotFoundException("Article");
         }
-        List<Article> articles = ArticleEntityMapper.MAPPER.toListModel(articlesEntities);
-        return new PageImpl<>(articles,pageRequest,articles.size());
+        return articlesEntities.map(ArticleEntityMapper.MAPPER::toModel);
+
     }
 }

@@ -54,7 +54,8 @@ public class ArticleController {
     public Page<Article> getAllArticles(@RequestParam(required = false, defaultValue = "DESC") String orderBy,
                                         @RequestParam(required = false, defaultValue = "createdAt") String sortBy,
                                         @RequestParam(required = false, defaultValue = "0") int page,
-                                        @RequestParam(required = false, defaultValue = "10") int size) throws ArticleNotFoundException {
+                                        @RequestParam(required = false, defaultValue = "5") int size) throws ArticleNotFoundException {
         return articleApplicationService.getAllArticles(orderBy,sortBy,page,size);
     }
+
 }
