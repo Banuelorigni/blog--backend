@@ -4,6 +4,7 @@ import com.example.blog.application.tags.TagApplicationService;
 import com.example.blog.application.tags.exceptions.TagNotFoundException;
 import com.example.blog.domain.articles.Article;
 import com.example.blog.domain.tag.Tag;
+import jakarta.annotation.security.PermitAll;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,11 +27,13 @@ public class TagController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
+    @PermitAll
     public List<Tag> getAllTags() throws TagNotFoundException {
         return tagApplicationService.findAll();
     }
 
     @GetMapping("/{tagId}")
+    @PermitAll
     public List<Article> getArticlesByTagId(@PathVariable Long tagId) {
         return tagApplicationService.findArticlesByTagId(tagId);
     }

@@ -27,6 +27,8 @@ public class SecurityConfig {
             "/swagger-ui/**",
             "/operator/login",
             "/users/login",
+            "/articles/all",
+            "/tags/**",
             "/users/register",
             "/system/health");
     @Autowired

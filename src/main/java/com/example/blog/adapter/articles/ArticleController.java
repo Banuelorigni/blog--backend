@@ -10,6 +10,7 @@ import com.example.blog.application.tags.exceptions.TagNotFoundException;
 import com.example.blog.domain.articles.Article;
 import com.example.blog.domain.tag.Tag;
 import io.swagger.v3.oas.annotations.Parameter;
+import jakarta.annotation.security.PermitAll;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -50,9 +51,10 @@ public class ArticleController {
         return articleApplicationService.createArticles(article);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
     @GetArticles
+    @PermitAll
     public Page<Article> getAllArticles(@RequestParam(required = false, defaultValue = "DESC") String orderBy,
                                         @RequestParam(required = false, defaultValue = "createdAt") String sortBy,
                                         @RequestParam(required = false, defaultValue = "0") int page,
