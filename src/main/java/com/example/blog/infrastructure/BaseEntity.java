@@ -26,17 +26,17 @@ public abstract class BaseEntity implements Auditable {
 
     @CreatedDate
     @Column(updatable = false)
-    private Instant createdAt = Instant.now();
+    private Instant createdAt;
 
     @LastModifiedDate
-    private Instant updatedAt= Instant.now();
+    private Instant updatedAt;
 
     @CreatedBy
     @Column(updatable = false)
-    private String createdBy= "Anonymous";
+    private String createdBy;
 
     @LastModifiedBy
-    private String updatedBy= "Anonymous";
+    private String updatedBy;
 
     @Version
     private Integer version = 0;

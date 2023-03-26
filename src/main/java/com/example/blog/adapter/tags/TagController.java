@@ -1,7 +1,6 @@
 package com.example.blog.adapter.tags;
 
 import com.example.blog.application.tags.TagApplicationService;
-import com.example.blog.application.tags.TagService;
 import com.example.blog.application.tags.exceptions.TagNotFoundException;
 import com.example.blog.domain.articles.Article;
 import com.example.blog.domain.tag.Tag;

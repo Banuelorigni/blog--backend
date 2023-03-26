@@ -1,3 +1,8 @@
+authorization:
+  jwt:
+    secret: BlogSecretKeyToGenJWTs
+    expires: 1800000
+
 server:
   port: 8080
 

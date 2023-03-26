@@ -1,39 +1,42 @@
-package com.example.blog.infrastructure.tags;
+package com.example.blog.infrastructure.user.entity;
 
 import com.example.blog.infrastructure.BaseEntity;
-import com.example.blog.infrastructure.articles.ArticlesEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.hibernate.annotations.Where;
 
-import java.util.List;
-
+@Getter
 @Entity
 @Builder
-@Setter
-@Getter
-@AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Tags")
+@AllArgsConstructor
+@Table(name = "users")
 @Where(clause = BaseEntity.SKIP_DELETED_CLAUSE)
-public class TagsEntity extends BaseEntity  {
+public class UserEntity extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name",nullable = false)
-    private String name;
-    @ManyToMany(mappedBy = "tags")
-    List<ArticlesEntity> articles;
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private RoleEntity role;
 
+    @Column(length = 16)
+    private String username;
+
+    @Column(length = 60)
+    private String password;
+
+    private String nickname;
 }
