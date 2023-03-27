@@ -9,6 +9,7 @@ import com.example.blog.application.tags.TagService;
 import com.example.blog.application.tags.exceptions.TagNotFoundException;
 import com.example.blog.domain.articles.Article;
 import com.example.blog.domain.tag.Tag;
+import com.example.blog.support.exceptions.AuthorizationException;
 import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.annotation.security.PermitAll;
 import jakarta.transaction.Transactional;
@@ -60,13 +61,13 @@ public class ArticleController {
                                         @RequestParam(required = false, defaultValue = "createdAt") String sortBy,
                                         @RequestParam(required = false, defaultValue = "0") int page,
                                         @RequestParam(required = false, defaultValue = "5") int size) throws ArticleNotFoundException {
-        return articleApplicationService.getAllArticles(orderBy,sortBy,page,size);
+        return articleApplicationService.getAllArticles(orderBy, sortBy, page, size);
     }
 
     @GetMapping("/{articleId}")
-    @ResponseStatus(HttpStatus.OK)
     @PermitAll
-    public Article getArticleById(@PathVariable Long articleId){
+    @ResponseStatus(HttpStatus.OK)
+    public Article getArticleById(@PathVariable Long articleId) throws ArticleNotFoundException {
         return articleApplicationService.getArticleById(articleId);
     }
 }
