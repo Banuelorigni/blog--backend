@@ -1,4 +1,4 @@
-package com.example.blog.adapter.swaggers;
+package com.example.blog.adapter.articles.swaggers;
 
 import com.example.blog.domain.articles.Article;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -12,14 +12,14 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface GetArticles {
-    String summary() default "Get article";
+public @interface SaveArticles {
+    String summary() default "Save article";
     ApiResponse[] apiResponses() default {
-            @ApiResponse(responseCode = "200", description = "Get Articles",
+            @ApiResponse(responseCode = "201", description = "Saved Article",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = Article.class))
                     }),
-            @ApiResponse(responseCode = "404", description = "Article not found",
+            @ApiResponse(responseCode = "404", description = "Tag not found",
                     content = @Content),
     };
 }

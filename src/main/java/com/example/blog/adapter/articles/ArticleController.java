@@ -1,15 +1,15 @@
 package com.example.blog.adapter.articles;
 
 import com.example.blog.adapter.articles.dto.CreateArticleRequest;
-import com.example.blog.adapter.swaggers.GetArticles;
-import com.example.blog.adapter.swaggers.SaveArticles;
+import com.example.blog.adapter.articles.swaggers.GetArticles;
+import com.example.blog.adapter.articles.swaggers.GetOneArticle;
+import com.example.blog.adapter.articles.swaggers.SaveArticles;
 import com.example.blog.application.articles.ArticleApplicationService;
 import com.example.blog.application.articles.exceptions.ArticleNotFoundException;
 import com.example.blog.application.tags.TagService;
 import com.example.blog.application.tags.exceptions.TagNotFoundException;
 import com.example.blog.domain.articles.Article;
 import com.example.blog.domain.tag.Tag;
-import com.example.blog.support.exceptions.AuthorizationException;
 import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.annotation.security.PermitAll;
 import jakarta.transaction.Transactional;
@@ -66,6 +66,7 @@ public class ArticleController {
 
     @GetMapping("/{articleId}")
     @PermitAll
+    @GetOneArticle
     @ResponseStatus(HttpStatus.OK)
     public Article getArticleById(@PathVariable Long articleId) throws ArticleNotFoundException {
         return articleApplicationService.getArticleById(articleId);

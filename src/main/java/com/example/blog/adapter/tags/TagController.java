@@ -1,5 +1,8 @@
 package com.example.blog.adapter.tags;
 
+import com.example.blog.adapter.tags.swaggers.GetArticlesByTagId;
+import com.example.blog.adapter.tags.swaggers.GetTags;
+import com.example.blog.adapter.tags.swaggers.SaveTag;
 import com.example.blog.application.tags.TagApplicationService;
 import com.example.blog.application.tags.exceptions.TagNotFoundException;
 import com.example.blog.domain.articles.Article;
@@ -30,6 +33,7 @@ public class TagController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @PermitAll
+    @SaveTag
     public Tag createTag(@RequestBody @Valid String tag) {
         return tagApplicationService.createTag(tag);
     }
@@ -37,12 +41,14 @@ public class TagController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     @PermitAll
+    @GetTags
     public List<Tag> getAllTags() throws TagNotFoundException {
         return tagApplicationService.findAll();
     }
 
     @GetMapping("/{tagId}")
     @PermitAll
+    @GetArticlesByTagId
     public List<Article> getArticlesByTagId(@PathVariable Long tagId) {
         return tagApplicationService.findArticlesByTagId(tagId);
     }
