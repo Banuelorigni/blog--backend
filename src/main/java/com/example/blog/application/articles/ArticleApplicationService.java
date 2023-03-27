@@ -31,4 +31,8 @@ public class ArticleApplicationService {
     public Page<Article> getAllArticles(String orderBy, String sortBy, int page, int size) {
         return articleRepository.getAllArticles(orderBy,sortBy,page,size);
     }
+
+    public Article getArticleById(Long articleId) {
+        return articleRepository.getArticleById(articleId);
+    }
 }

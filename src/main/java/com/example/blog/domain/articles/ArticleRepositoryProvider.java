@@ -26,10 +26,16 @@ public class ArticleRepositoryProvider implements ArticleRepository {
         PageRequest pageRequest = PageRequest.of(page, size, sortDirection, sortBy);
 
         Page<ArticlesEntity> articlesEntities = jpaArticleRepository.findAll(pageRequest);
-        if (articlesEntities.getTotalElements() == 0){
+        if (articlesEntities.getTotalElements() == 0) {
             throw new ArticleNotFoundException("Article");
         }
         return articlesEntities.map(ArticleEntityMapper.MAPPER::toModel);
 
+    }
+
+    @Override
+    public Article getArticleById(Long articleId) {
+        ArticlesEntity articlesEntity = jpaArticleRepository.findById(articleId).orElseThrow(() -> new ArticleNotFoundException("文章" + articleId));
+        return ArticleEntityMapper.MAPPER.toModel(articlesEntity);
     }
 }

@@ -8,4 +8,6 @@ public interface ArticleRepository {
     Article save(Article article);
 
     Page<Article> getAllArticles(String orderBy, String sortBy, int page, int size);
+
+    Article getArticleById(Long articleId);
 }

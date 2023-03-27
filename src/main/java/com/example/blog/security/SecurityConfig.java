@@ -28,6 +28,7 @@ public class SecurityConfig {
             "/operator/login",
             "/users/login",
             "/articles/all",
+            "/articles/",
             "/tags/**",
             "/users/register",
             "/system/health");
