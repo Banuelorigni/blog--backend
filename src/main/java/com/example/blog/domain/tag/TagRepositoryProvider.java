@@ -21,6 +21,12 @@ public class TagRepositoryProvider implements TagRepository{
     }
 
     @Override
+    public Tag saveTag(String tag) {
+        TagsEntity tagsEntity = TagEntityMapper.MAPPER.toEntity(tag);
+        return TagEntityMapper.MAPPER.toModel(jpaTagRepository.save(tagsEntity));
+    }
+
+    @Override
     public void save(List<String> tags) {
         List<Tag> tagList = tags.stream().map(tag -> Tag.builder().name(tag).build()).toList();
         List<TagsEntity> tagsEntities = tagList.stream().map(TagEntityMapper.MAPPER::toEntity).toList();

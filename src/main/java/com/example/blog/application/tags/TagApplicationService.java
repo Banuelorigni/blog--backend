@@ -20,4 +20,8 @@ public class TagApplicationService {
     public List<Article> findArticlesByTagId(Long tagId) {
         return tagRepository.findById(tagId);
     }
+
+    public Tag createTag(String tag) {
+        return tagRepository.saveTag(tag);
+    }
 }

@@ -3,6 +3,7 @@ package com.example.blog.domain.tag.mapper;
 import com.example.blog.domain.tag.Tag;
 import com.example.blog.infrastructure.tags.TagsEntity;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
@@ -17,4 +18,6 @@ public interface TagEntityMapper {
     Tag toModel(TagsEntity tagInfo);
 
     List<Tag> toEntity(List<TagsEntity> tags);
+    @Mapping(source = "tag", target = "name")
+    TagsEntity toEntity(String tag);
 }

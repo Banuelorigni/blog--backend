@@ -15,4 +15,6 @@ public interface TagRepository {
     List<Tag> findAll();
 
     List<Article> findById(Long tagId);
+
+    Tag saveTag(String tag);
 }
