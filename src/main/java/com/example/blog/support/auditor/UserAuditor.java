@@ -14,8 +14,7 @@ public class UserAuditor implements AuditorAware<String> {
     public Optional<String> getCurrentAuditor() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (authentication != null && authentication.getPrincipal() instanceof UserEntity) {
-            UserEntity userPrincipal = (UserEntity) authentication.getPrincipal();
+        if (authentication != null && authentication.getPrincipal() instanceof UserEntity userPrincipal) {
             return Optional.of(userPrincipal.getUsername());
         } else {
             return Optional.empty();
