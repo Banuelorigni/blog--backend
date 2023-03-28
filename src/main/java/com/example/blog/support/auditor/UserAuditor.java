@@ -1,9 +1,7 @@
 package com.example.blog.support.auditor;
 
 import com.example.blog.infrastructure.user.entity.UserEntity;
-import com.example.blog.security.UserPrincipalInfo;
 import org.springframework.data.domain.AuditorAware;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
