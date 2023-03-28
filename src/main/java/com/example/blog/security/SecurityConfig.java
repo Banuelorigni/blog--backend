@@ -25,13 +25,14 @@ public class SecurityConfig {
 
     public static final List<String> IGNORE_URLS = Arrays.asList(
             "/v3/api-docs/**",
-            "/swagger-ui/**",
+            "/swagger-ui.html",
             "/operator/login",
             "/users/login",
             "/articles/all",
             "/articles/{articleId}",
             "/tags/**",
             "/users/register",
+            "/users/logout",
             "/system/health");
     @Autowired
     public JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;

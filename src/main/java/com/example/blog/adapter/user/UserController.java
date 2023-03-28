@@ -17,7 +17,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -93,10 +95,10 @@ public class UserController {
     }
 
     @PostMapping("/logout")
-    @Operation(summary = "login out")
+    @Operation(summary = "log out")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "login out",
+                    @ApiResponse(responseCode = "200", description = "log out",
                             content = {@Content(mediaType = "application/json",
                                     schema = @Schema(implementation = String.class))
                             }),
