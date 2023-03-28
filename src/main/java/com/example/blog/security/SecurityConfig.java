@@ -1,10 +1,9 @@
 package com.example.blog.security;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -20,6 +19,7 @@ import java.util.List;
 
 @Slf4j
 @Configuration
+@AllArgsConstructor
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
@@ -34,7 +34,6 @@ public class SecurityConfig {
             "/users/register",
             "/users/logout",
             "/system/health");
-    @Autowired
     public JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
 
     @Bean
