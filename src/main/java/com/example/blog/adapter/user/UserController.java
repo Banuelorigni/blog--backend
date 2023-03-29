@@ -17,7 +17,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -27,6 +29,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -94,6 +97,7 @@ public class UserController {
 
     @PostMapping("/logout")
     @Operation(summary = "log out")
+    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
     @ApiResponses(
             value = {
                     @ApiResponse(responseCode = "200", description = "log out",
@@ -102,7 +106,7 @@ public class UserController {
                             }),
             }
     )
-    public ResponseEntity<String> loginOut() {
+    public ResponseEntity<String> logout() {
         return ResponseEntity
                 .ok()
                 .header(COOKIE_NAME, getCookieValue(null))

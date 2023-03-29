@@ -32,7 +32,6 @@ public class SecurityConfig {
             "/articles/{articleId}",
             "/tags/**",
             "/users/register",
-            "/users/logout",
             "/system/health");
     public JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
 
