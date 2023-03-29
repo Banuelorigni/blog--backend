@@ -95,6 +95,18 @@ class ArticleControllerTest {
         verify(articleApplicationService).markdownToHtml(createArticleRequest.getContent());
     }
 
+    @Test
+    @Sql({"classpath:scripts/insert_a_portal_user.sql"})
+    void should_return_forbidden_when_save_course_for_portal_user() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders
+                        .post("/articles")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(new ObjectMapper().writeValueAsString(createArticleRequest))
+                        .cookie(new Cookie("blog_token", jwtUtils.createJwtToken(2L, "PORTAL_USER", "portal_user")))
+                )
+                .andExpect(status().isForbidden());
+
+    }
 
 
 }
