@@ -1,6 +1,7 @@
 package com.example.blog.infrastructure.articles;
 
 import com.example.blog.infrastructure.BaseEntity;
+import com.example.blog.infrastructure.comments.CommentEntity;
 import com.example.blog.infrastructure.tags.TagsEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -11,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -54,5 +56,6 @@ public class ArticlesEntity extends BaseEntity  {
             }
     )
     private List<TagsEntity> tags;
-
+    @OneToMany(mappedBy = "article")
+    private List<CommentEntity> comments;
 }

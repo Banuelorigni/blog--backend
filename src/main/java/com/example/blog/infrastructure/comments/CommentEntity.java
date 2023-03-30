@@ -1,15 +1,14 @@
-package com.example.blog.infrastructure.user.entity;
+package com.example.blog.infrastructure.comments;
 
 import com.example.blog.infrastructure.BaseEntity;
-import com.example.blog.infrastructure.comments.CommentEntity;
-import jakarta.persistence.Column;
+import com.example.blog.infrastructure.articles.ArticlesEntity;
+import com.example.blog.infrastructure.user.entity.UserEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,33 +16,22 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Where;
 
-import java.util.List;
-
-@Getter
 @Entity
 @Builder
-@NoArgsConstructor
+@Getter
 @AllArgsConstructor
-@Table(name = "users")
+@NoArgsConstructor
+@Table(name = "comments")
 @Where(clause = BaseEntity.SKIP_DELETED_CLAUSE)
-public class UserEntity extends BaseEntity {
-
+public class CommentEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private RoleEntity role;
-
-    @Column(length = 16)
-    private String username;
-
-    @Column(length = 60)
-    private String password;
-
-    private String nickname;
-    @OneToMany(mappedBy = "user")
-    private List<CommentEntity> comments;
-
+    private String content;
+    @ManyToOne(targetEntity = UserEntity.class)
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
+    @ManyToOne(targetEntity = ArticlesEntity.class)
+    @JoinColumn(name = "article_id")
+    private ArticlesEntity article;
 }
