@@ -198,11 +198,6 @@ class GetAllArticles{
                 .andExpect(jsonPath("$.pageable.pageSize").value(5))
                 .andExpect(jsonPath("$.totalPages").value(2));
 
-//        List<Article> articles = asList(
-//                Article.builder().id(1L).title("文章1").content("这是一篇关于测试数据的文章内容。").wordNumbers(16).coverUrl("https://example.com/cover1.jpg").build(),
-//                Article.builder().id(2L).title("文章2").content("这是第二篇测试数据文章的内容").wordNumbers(14).coverUrl("https://example.com/cover2.jpg").build(),
-//                Article.builder().id(3L).title("文章3").content("这是一篇测试数据文章").wordNumbers(10).coverUrl("https://example.com/cover3.jpg").build()
-//        );
     }
 
 }
