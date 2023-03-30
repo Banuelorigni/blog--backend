@@ -9,7 +9,6 @@ import com.example.blog.security.UserPrincipalInfo;
 import com.example.blog.support.exceptions.AuthorizationException;
 import com.example.blog.support.exceptions.ErrorCode;
 import com.example.blog.support.utils.JwtUtils;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

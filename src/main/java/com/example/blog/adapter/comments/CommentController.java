@@ -42,9 +42,10 @@ public class CommentController {
         Comment comment = CommentDtoMapper.MAPPER.toModel(commentRequest, userName);
         return commentApplicationService.save(comment);
     }
+
     @GetMapping("/{articleId}")
     @ResponseStatus(HttpStatus.OK)
-    public List<Comment> getCommentByArticleId(@PathVariable Long articleId){
+    public List<Comment> getCommentByArticleId(@PathVariable Long articleId) {
         return commentApplicationService.getCommentByArticleId(articleId);
     }
 }

@@ -2,7 +2,6 @@ package com.example.blog.infrastructure.tags;
 
 import com.example.blog.infrastructure.BaseEntity;
 import com.example.blog.infrastructure.articles.ArticlesEntity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
