@@ -1,6 +1,7 @@
 package com.example.blog.support.handlers;
 
 import com.example.blog.application.articles.exceptions.ArticleNotFoundException;
+import com.example.blog.application.comments.exceptions.CommentNotFoundException;
 import com.example.blog.application.tags.exceptions.TagNotFoundException;
 import com.example.blog.support.exceptions.ApiError;
 import org.springframework.http.HttpStatus;
@@ -39,6 +40,13 @@ RestExceptionHandler {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ApiError handleArticleNotExist(ArticleNotFoundException exception) {
+        HttpStatus badRequest = HttpStatus.NOT_FOUND;
+
+        return new ApiError(badRequest.value(), badRequest.getReasonPhrase(), exception.getMessage());
+    }
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiError handleCommentNotExist(CommentNotFoundException exception){
         HttpStatus badRequest = HttpStatus.NOT_FOUND;
 
         return new ApiError(badRequest.value(), badRequest.getReasonPhrase(), exception.getMessage());
