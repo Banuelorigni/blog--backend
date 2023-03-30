@@ -108,7 +108,7 @@ class ArticleControllerTest {
                     .andReturn()
                     .getResponse();
 
-            assertEquals(response.getContentAsString(), articleJson.write(article).getJson());
+            assertEquals(articleJson.write(article).getJson(),response.getContentAsString());
             verify(articleApplicationService).createArticles(any(Article.class));
             verify(tagService).findById(createArticleRequest.getTags());
             verify(articleApplicationService).countWordNumber(createArticleRequest.getContent());
