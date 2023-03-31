@@ -6,6 +6,9 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
+import org.springframework.data.domain.Page;
+
+import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CommentDtoMapper {
@@ -14,4 +17,5 @@ public interface CommentDtoMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(source = "commentRequest.article_id",target = "article_id")
     Comment toModel(CreateCommentRequest commentRequest, String userName);
+
 }

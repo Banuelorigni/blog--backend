@@ -9,11 +9,11 @@ import com.example.blog.infrastructure.comments.CommentEntity;
 import com.example.blog.infrastructure.user.JpaUserRepository;
 import com.example.blog.infrastructure.user.entity.UserEntity;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 @AllArgsConstructor
@@ -35,11 +35,15 @@ public class CommentRepositoryProvider implements CommentRepository {
     }
 
     @Override
-    public List<Comment> getCommentByArticleId(Long articleId) {
-        List<CommentEntity> commentEntities = jpaCommentRepository.findAllByArticleId(articleId);
-        if (commentEntities.size() == 0) {
+    public Page<Comment> getCommentByArticleId(Long articleId, String orderBy, String sortBy, int page, int size) {
+        Sort.Direction sortDirection = orderBy.equalsIgnoreCase("ASC") ? Sort.Direction.ASC : Sort.Direction.DESC;
+        PageRequest pageRequest = PageRequest.of(page, size, sortDirection, sortBy);
+        Page<CommentEntity> commentEntities = jpaCommentRepository.findAllByArticleId(articleId,pageRequest);
+
+        if (commentEntities.getTotalElements() == 0) {
             throw new CommentNotFoundException("article" + articleId + "的评论");
         }
-        return commentEntities.stream().map(CommentEntityMapper.MAPPER::toModel).collect(Collectors.toList());
+
+        return commentEntities.map(CommentEntityMapper.MAPPER::toModel);
     }
 }
