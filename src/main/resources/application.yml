@@ -19,7 +19,7 @@ spring:
     username: root
     password: p@ssword
   jpa:
-    database-platform: org.hibernate.dialect.MySQL8Dialect
+    database-platform: org.hibernate.dialect.MySQLDialect
     show-sql: true
     hibernate:
       ddl-auto: validate
