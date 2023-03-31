@@ -16,6 +16,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.ActiveProfiles;
@@ -93,12 +97,15 @@ class CommentControllerTest {
     }
 
     @Nested
+    @Sql("classpath:scripts/insert_comments.sql")
     class GetCommentByArticleId {
         @Test
         void should_get_comments_by_article_id() throws Exception {
             Comment comment = Comment.builder().id(1L).content("test").article_id(1L).userName("portal_user").build();
+            PageRequest pageRequest = PageRequest.of(0, 10, Sort.Direction.valueOf("DESC"), "createdAt");
 
-            when(commentApplicationService.getCommentByArticleId(1L)).thenReturn(List.of(comment));
+            when(commentApplicationService.getCommentByArticleId(1L, "DESC","createdAt", 0, 10))
+                    .thenReturn(new PageImpl<>(List.of(comment),pageRequest,1));
 
             mockMvc.perform(MockMvcRequestBuilders
                             .get("/comments/1")
@@ -106,12 +113,15 @@ class CommentControllerTest {
                             .cookie(new Cookie("blog_token", jwtUtils.createJwtToken(2L, "PORTAL_USER", "portal_user")))
                     )
                     .andExpect(status().isOk())
-                    .andExpect(jsonPath("$[0].content").value("test"))
-                    .andExpect(jsonPath("$[0].userName").value("portal_user"));
+                    .andExpect(jsonPath("$.content[0].content").value("test"))
+                    .andExpect(jsonPath("$.content[0].userName").value("portal_user"))
+                    .andExpect(jsonPath("$.pageable.pageSize").value(10))
+                    .andExpect(jsonPath("$.totalElements").value(1))
+                    .andExpect(jsonPath("$.totalPages").value(1));;
         }
         @Test
         void should_throw_CommentNotFoundException_when_comment_not_exist() throws Exception {
-            doThrow(new CommentNotFoundException("article999的评论")).when(commentApplicationService).getCommentByArticleId(999L);
+            doThrow(new CommentNotFoundException("article999的评论")).when(commentApplicationService).getCommentByArticleId(999L, "createdAt","DESC", 0, 5);
 
             mockMvc.perform(MockMvcRequestBuilders
                             .get("/comments/999")
