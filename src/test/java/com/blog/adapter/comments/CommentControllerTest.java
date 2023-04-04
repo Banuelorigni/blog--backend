@@ -1,5 +1,6 @@
 package com.blog.adapter.comments;
 
+import com.blog.BlogApplication;
 import com.blog.support.utils.JwtUtils;
 import com.blog.adapter.comments.dto.request.CreateCommentRequest;
 import com.blog.application.articles.exceptions.ArticleNotFoundException;
@@ -37,7 +38,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
+@SpringBootTest(classes = BlogApplication.class)
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 @AutoConfigureJsonTesters
@@ -96,9 +97,9 @@ class CommentControllerTest {
     }
 
     @Nested
-    @Sql("classpath:scripts/insert_comments.sql")
     class GetCommentByArticleId {
         @Test
+        @Sql("classpath:scripts/insert_comments.sql")
         void should_get_comments_by_article_id() throws Exception {
             Comment comment = Comment.builder().id(1L).content("test").article_id(1L).userName("portal_user").build();
             PageRequest pageRequest = PageRequest.of(0, 10, Sort.Direction.valueOf("DESC"), "createdAt");
@@ -120,7 +121,7 @@ class CommentControllerTest {
         }
         @Test
         void should_throw_CommentNotFoundException_when_comment_not_exist() throws Exception {
-            doThrow(new CommentNotFoundException("article999的评论")).when(commentApplicationService).getCommentByArticleId(999L, "createdAt","DESC", 0, 5);
+            doThrow(new CommentNotFoundException("article999的评论")).when(commentApplicationService).getCommentByArticleId(999L, "DESC","createdAt", 0, 10);
 
             mockMvc.perform(MockMvcRequestBuilders
                             .get("/comments/999")

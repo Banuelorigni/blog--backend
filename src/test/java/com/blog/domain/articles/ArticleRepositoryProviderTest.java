@@ -1,5 +1,6 @@
 package com.blog.domain.articles;
 
+import com.blog.BlogApplication;
 import com.blog.domain.tag.Tag;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +19,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@SpringBootTest
+@SpringBootTest(classes = BlogApplication.class)
 @ActiveProfiles("test")
 @Transactional
 class ArticleRepositoryProviderTest {

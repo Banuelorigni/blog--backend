@@ -1,5 +1,6 @@
 package com.blog.adapter.articles;
 
+import com.blog.BlogApplication;
 import com.blog.adapter.articles.dto.CreateArticleRequest;
 import com.blog.application.articles.ArticleApplicationService;
 import com.blog.application.articles.exceptions.ArticleNotFoundException;
@@ -43,7 +44,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
+@SpringBootTest(classes = BlogApplication.class)
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 @AutoConfigureJsonTesters
