@@ -25,7 +25,12 @@ public class SecurityConfig {
 
     public static final List<String> IGNORE_URLS = Arrays.asList(
             "/v3/api-docs/**",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
             "/swagger-ui.html",
+            "/webjars/**",
             "/operator/login",
             "/users/login",
             "/articles/all",
