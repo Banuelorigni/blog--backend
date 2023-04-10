@@ -1,4 +1,4 @@
-package com.blog.adapter.comments;
+package com.blog.adapter.comments.mapper;
 
 import com.blog.adapter.comments.dto.request.CreateCommentRequest;
 import com.blog.domain.comments.Comment;

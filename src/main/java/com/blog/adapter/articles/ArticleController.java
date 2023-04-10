@@ -1,6 +1,7 @@
 package com.blog.adapter.articles;
 
 import com.blog.adapter.articles.dto.CreateArticleRequest;
+import com.blog.adapter.articles.mapper.ArticleDtoMapper;
 import com.blog.application.articles.ArticleApplicationService;
 import com.blog.adapter.articles.swaggers.GetArticles;
 import com.blog.adapter.articles.swaggers.GetOneArticle;

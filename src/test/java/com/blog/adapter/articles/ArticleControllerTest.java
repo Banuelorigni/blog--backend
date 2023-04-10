@@ -2,6 +2,7 @@ package com.blog.adapter.articles;
 
 import com.blog.BlogApplication;
 import com.blog.adapter.articles.dto.CreateArticleRequest;
+import com.blog.adapter.articles.mapper.ArticleDtoMapper;
 import com.blog.application.articles.ArticleApplicationService;
 import com.blog.application.articles.exceptions.ArticleNotFoundException;
 import com.blog.application.tags.TagService;

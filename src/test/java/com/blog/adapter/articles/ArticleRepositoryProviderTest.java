@@ -1,7 +1,8 @@
-package com.blog.domain.articles;
+package com.blog.adapter.articles;
 
 import com.blog.BlogApplication;
 import com.blog.adapter.articles.repository.ArticleRepositoryProvider;
+import com.blog.domain.articles.Article;
 import com.blog.domain.tag.Tag;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

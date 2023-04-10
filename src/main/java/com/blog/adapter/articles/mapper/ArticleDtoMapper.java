@@ -1,4 +1,4 @@
-package com.blog.adapter.articles;
+package com.blog.adapter.articles.mapper;
 
 import com.blog.adapter.articles.dto.CreateArticleRequest;
 import com.blog.domain.articles.Article;

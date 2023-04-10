@@ -2,6 +2,7 @@ package com.blog.adapter.comments;
 
 import com.blog.adapter.comments.aspect.GetUserIdFromCookies;
 import com.blog.adapter.comments.dto.request.CreateCommentRequest;
+import com.blog.adapter.comments.mapper.CommentDtoMapper;
 import com.blog.application.comments.CommentApplicationService;
 import com.blog.application.user.UserApplicationService;
 import com.blog.domain.comments.Comment;

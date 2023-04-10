@@ -1,5 +1,6 @@
 plugins {
 	id 'java'
+	id 'jacoco'
 	id 'org.springframework.boot' version '3.0.4'
 	id 'io.spring.dependency-management' version '1.1.0'
 	id "org.flywaydb.flyway" version '9.8.1'
@@ -7,6 +8,70 @@ plugins {
 
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
+
+
+def excludedClassDirectories = [
+		'com/blog/security/JwtAuthenticationTokenFilter*',
+		'com/blog/security/SecurityConfig*',
+		'com/blog/security/UserPrincipalInfo*',
+		'com/blog/adapter/comments/CommentDtoMapper*',
+		'com/blog/infrastructure/articles/mapper/*',
+		'com/blog/infrastructure/comments/mapper/*',
+		'com/blog/infrastructure/tags/mapper/*',
+		'com/blog/infrastructure/user/mapper/*',
+		'com/blog/support/utils/JsonUtils.java',
+		'com/blog/support/handlers/FilterExceptionHandler*',
+		'com/blog/support/constants/SecurityConstants*',
+		'com/blog/adapter/user/mapper/*',
+		'com/blog/adapter/articles/mapper/*',
+		'com/blog/adapter/comments/mapper/*',
+		'com/blog/BlogApplication*'
+]
+
+jacocoTestReport {
+	reports {
+		xml.enabled false
+		csv.enabled false
+		html.destination file("${buildDir}/reports/jacoco")
+	}
+
+	afterEvaluate {
+		classDirectories.setFrom(files(classDirectories.files.collect {
+			fileTree(dir: it, excludes: excludedClassDirectories)
+		}))
+	}
+}
+
+
+jacocoTestCoverageVerification {
+	dependsOn test
+	afterEvaluate {
+		classDirectories.setFrom(files(classDirectories.files.collect {
+			fileTree(dir: it, excludes: excludedClassDirectories)
+		}))
+	}
+	violationRules {
+		rule {
+			limit {
+				minimum = 0.85
+				counter = 'LINE'
+				value = 'COVEREDRATIO'
+			}
+		}
+		rule {
+			limit {
+				minimum = 0.85
+				counter = 'BRANCH'
+				value = 'COVEREDRATIO'
+			}
+		}
+	}
+}
+
+jacocoTestReport {
+	dependsOn test
+}
+
 
 flyway {
 	url = 'jdbc:mysql://localhost:3337/blog?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&connectionCollation=utf8mb4_bin&useServerPrepStmts=false&rewriteBatchedStatements=true&createDatabaseIfNotExist=true'
@@ -60,4 +125,8 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+test {
+	finalizedBy jacocoTestReport
 }
