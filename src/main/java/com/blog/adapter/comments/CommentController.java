@@ -1,11 +1,10 @@
 package com.blog.adapter.comments;
 
+import com.blog.adapter.comments.aspect.GetUserIdFromCookies;
 import com.blog.adapter.comments.dto.request.CreateCommentRequest;
 import com.blog.application.comments.CommentApplicationService;
 import com.blog.application.user.UserApplicationService;
 import com.blog.domain.comments.Comment;
-import com.blog.support.utils.JwtUtils;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -28,15 +27,14 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @Transactional
 public class CommentController {
-    private final JwtUtils jwtUtils;
     private final CommentApplicationService commentApplicationService;
     private final UserApplicationService userApplicationService;
 
     @PostMapping
+    @GetUserIdFromCookies
     @ResponseStatus(HttpStatus.CREATED)
     public Comment createComment(@RequestBody @Valid CreateCommentRequest commentRequest, HttpServletRequest request) {
-        Cookie[] cookies = request.getCookies();
-        Long userId = Long.valueOf(jwtUtils.getUserIdFromCookies(cookies));
+        Long userId = (Long) request.getAttribute("userId");
         String userName = userApplicationService.findUserNameByUserId(userId);
 
         Comment comment = CommentDtoMapper.MAPPER.toModel(commentRequest, userName);

@@ -7,6 +7,6 @@ public class SecurityConstants {
     public static final String COOKIE_NAME = "set-cookie";
 
     public static String getCookieValue(String jwtToken) {
-        return "blog_token=" + jwtToken + "; path=/;HttpOnly; SameSite=None; Secure";
+        return "blog_token=" + jwtToken + "; path=/;HttpOnly";
     }
 }
