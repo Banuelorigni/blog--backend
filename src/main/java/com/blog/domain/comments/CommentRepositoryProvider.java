@@ -40,6 +40,7 @@ public class CommentRepositoryProvider implements CommentRepository {
         PageRequest pageRequest = PageRequest.of(page, size, sortDirection, sortBy);
         Page<CommentEntity> commentEntities = jpaCommentRepository.findAllByArticleId(articleId,pageRequest);
 
+        //todo
         if (commentEntities.getTotalElements() == 0) {
             throw new CommentNotFoundException("article" + articleId + "的评论");
         }

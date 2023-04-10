@@ -58,6 +58,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     private Optional<UserEntity> getEntityOptional(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         try {
+            //todo
             String token = Arrays.stream(cookies)
                     .filter(cookie -> cookie.getName().equals(SecurityConstants.TOKEN_NAME))
                     .findFirst().get().getValue();

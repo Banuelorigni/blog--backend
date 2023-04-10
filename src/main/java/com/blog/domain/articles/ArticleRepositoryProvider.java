@@ -1,7 +1,7 @@
 package com.blog.domain.articles;
 
-import com.blog.domain.articles.mapper.ArticleEntityMapper;
 import com.blog.application.articles.exceptions.ArticleNotFoundException;
+import com.blog.domain.articles.mapper.ArticleEntityMapper;
 import com.blog.infrastructure.articles.ArticlesEntity;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -27,7 +27,7 @@ public class ArticleRepositoryProvider implements ArticleRepository {
 
         Page<ArticlesEntity> articlesEntities = jpaArticleRepository.findAll(pageRequest);
         if (articlesEntities.getTotalElements() == 0) {
-            throw new ArticleNotFoundException("Article");
+            return null;
         }
         return articlesEntities.map(ArticleEntityMapper.MAPPER::toModel);
 
