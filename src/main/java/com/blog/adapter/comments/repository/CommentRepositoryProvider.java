@@ -1,10 +1,11 @@
-package com.blog.domain.comments;
+package com.blog.adapter.comments.repository;
 
 import com.blog.application.comments.exceptions.CommentNotFoundException;
-import com.blog.domain.articles.JpaArticleRepository;
-import com.blog.domain.comments.mapper.CommentEntityMapper;
+import com.blog.adapter.articles.repository.JpaArticleRepository;
+import com.blog.domain.comments.Comment;
+import com.blog.infrastructure.comments.mapper.CommentEntityMapper;
 import com.blog.infrastructure.articles.ArticlesEntity;
-import com.blog.infrastructure.user.JpaUserRepository;
+import com.blog.adapter.user.repository.JpaUserRepository;
 import com.blog.infrastructure.user.entity.UserEntity;
 import com.blog.application.articles.exceptions.ArticleNotFoundException;
 import com.blog.infrastructure.comments.CommentEntity;

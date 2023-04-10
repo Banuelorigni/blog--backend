@@ -1,5 +1,6 @@
-package com.blog.domain.comments;
+package com.blog.adapter.comments.repository;
 
+import com.blog.domain.comments.Comment;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 

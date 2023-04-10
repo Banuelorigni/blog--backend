@@ -2,7 +2,7 @@ package com.blog.application.tags;
 
 import com.blog.application.tags.exceptions.TagNotFoundException;
 import com.blog.domain.tag.Tag;
-import com.blog.domain.tag.TagRepository;
+import com.blog.adapter.tags.repository.TagRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

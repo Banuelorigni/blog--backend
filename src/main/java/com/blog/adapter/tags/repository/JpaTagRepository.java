@@ -1,4 +1,4 @@
-package com.blog.domain.tag;
+package com.blog.adapter.tags.repository;
 
 import com.blog.infrastructure.tags.TagsEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

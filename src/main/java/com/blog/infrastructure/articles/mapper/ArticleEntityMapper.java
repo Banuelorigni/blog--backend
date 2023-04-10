@@ -1,4 +1,4 @@
-package com.blog.domain.articles.mapper;
+package com.blog.infrastructure.articles.mapper;
 
 import com.blog.domain.articles.Article;
 import com.blog.infrastructure.articles.ArticlesEntity;

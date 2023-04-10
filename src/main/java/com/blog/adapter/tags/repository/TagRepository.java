@@ -1,6 +1,7 @@
-package com.blog.domain.tag;
+package com.blog.adapter.tags.repository;
 
 import com.blog.domain.articles.Article;
+import com.blog.domain.tag.Tag;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

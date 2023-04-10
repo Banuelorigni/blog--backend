@@ -1,4 +1,4 @@
-package com.blog.domain.tag.mapper;
+package com.blog.infrastructure.tags.mapper;
 
 import com.blog.domain.tag.Tag;
 import com.blog.infrastructure.tags.TagsEntity;

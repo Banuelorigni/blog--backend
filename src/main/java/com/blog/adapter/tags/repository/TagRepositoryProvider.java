@@ -1,8 +1,9 @@
-package com.blog.domain.tag;
+package com.blog.adapter.tags.repository;
 
 import com.blog.domain.articles.Article;
-import com.blog.domain.articles.mapper.ArticleEntityMapper;
-import com.blog.domain.tag.mapper.TagEntityMapper;
+import com.blog.infrastructure.articles.mapper.ArticleEntityMapper;
+import com.blog.domain.tag.Tag;
+import com.blog.infrastructure.tags.mapper.TagEntityMapper;
 import com.blog.infrastructure.tags.TagsEntity;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;

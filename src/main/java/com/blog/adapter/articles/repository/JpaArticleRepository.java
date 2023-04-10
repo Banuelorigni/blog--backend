@@ -1,4 +1,4 @@
-package com.blog.domain.articles;
+package com.blog.adapter.articles.repository;
 
 import com.blog.infrastructure.articles.ArticlesEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

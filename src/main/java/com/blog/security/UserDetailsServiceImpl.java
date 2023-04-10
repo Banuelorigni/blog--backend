@@ -1,6 +1,6 @@
 package com.blog.security;
 
-import com.blog.domain.user.UserRepository;
+import com.blog.adapter.user.repository.UserRepository;
 import com.blog.infrastructure.user.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

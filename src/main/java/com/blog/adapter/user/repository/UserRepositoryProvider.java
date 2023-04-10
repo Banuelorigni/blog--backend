@@ -1,7 +1,6 @@
-package com.blog.infrastructure.user;
+package com.blog.adapter.user.repository;
 
 import com.blog.domain.user.User;
-import com.blog.domain.user.UserRepository;
 import com.blog.infrastructure.user.entity.RoleEntity;
 import com.blog.infrastructure.user.mapper.UserEntityMapper;
 import com.blog.adapter.user.mapper.UserDtoMapper;

@@ -1,4 +1,4 @@
-package com.blog.infrastructure.user;
+package com.blog.adapter.user.repository;
 
 import com.blog.infrastructure.user.entity.RoleEntity;
 import com.blog.infrastructure.user.entity.UserEntity;

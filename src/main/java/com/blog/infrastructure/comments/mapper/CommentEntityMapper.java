@@ -1,4 +1,4 @@
-package com.blog.domain.comments.mapper;
+package com.blog.infrastructure.comments.mapper;
 
 import com.blog.infrastructure.articles.ArticlesEntity;
 import com.blog.infrastructure.user.entity.UserEntity;

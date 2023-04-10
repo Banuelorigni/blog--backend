@@ -1,5 +1,6 @@
-package com.blog.domain.user;
+package com.blog.adapter.user.repository;
 
+import com.blog.domain.user.User;
 import com.blog.infrastructure.user.entity.UserEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

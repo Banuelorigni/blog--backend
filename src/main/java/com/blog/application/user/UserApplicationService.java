@@ -5,7 +5,7 @@ import com.blog.infrastructure.user.entity.RoleEntity;
 import com.blog.support.exceptions.ErrorCode;
 import com.blog.domain.user.RoleEnum;
 import com.blog.domain.user.User;
-import com.blog.domain.user.UserRepository;
+import com.blog.adapter.user.repository.UserRepository;
 import com.blog.security.UserPrincipalInfo;
 import com.blog.support.exceptions.AuthorizationException;
 import com.blog.support.utils.JwtUtils;

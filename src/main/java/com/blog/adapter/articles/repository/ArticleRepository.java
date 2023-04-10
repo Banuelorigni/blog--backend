@@ -1,5 +1,6 @@
-package com.blog.domain.articles;
+package com.blog.adapter.articles.repository;
 
+import com.blog.domain.articles.Article;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 

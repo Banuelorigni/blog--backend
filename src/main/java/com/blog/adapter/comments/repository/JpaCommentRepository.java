@@ -1,4 +1,4 @@
-package com.blog.domain.comments;
+package com.blog.adapter.comments.repository;
 
 import com.blog.infrastructure.comments.CommentEntity;
 import org.springframework.data.domain.Page;

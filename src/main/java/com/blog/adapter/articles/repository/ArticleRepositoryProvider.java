@@ -1,7 +1,8 @@
-package com.blog.domain.articles;
+package com.blog.adapter.articles.repository;
 
 import com.blog.application.articles.exceptions.ArticleNotFoundException;
-import com.blog.domain.articles.mapper.ArticleEntityMapper;
+import com.blog.domain.articles.Article;
+import com.blog.infrastructure.articles.mapper.ArticleEntityMapper;
 import com.blog.infrastructure.articles.ArticlesEntity;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
