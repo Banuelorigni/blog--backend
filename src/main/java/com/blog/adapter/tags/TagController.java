@@ -1,12 +1,11 @@
 package com.blog.adapter.tags;
 
+import com.blog.adapter.tags.swaggers.GetArticlesByTagId;
+import com.blog.adapter.tags.swaggers.GetTags;
 import com.blog.application.tags.TagApplicationService;
 import com.blog.application.tags.exceptions.TagNotFoundException;
 import com.blog.domain.articles.Article;
 import com.blog.domain.tag.Tag;
-import com.blog.adapter.tags.swaggers.GetArticlesByTagId;
-import com.blog.adapter.tags.swaggers.GetTags;
-import com.blog.adapter.tags.swaggers.SaveTag;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.security.PermitAll;
 import jakarta.transaction.Transactional;
@@ -35,24 +34,23 @@ public class TagController {
     private TagApplicationService tagApplicationService;
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @PermitAll
     @PreAuthorize("hasAuthority('ADMIN')")
-    @SaveTag
     @Operation(summary = "save tag")
     public Tag createTag(@RequestBody @Valid String tag) {
         return tagApplicationService.createTag(tag);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
     @PermitAll
     @GetTags
     @Operation(summary = "Get all tags")
-    public List<Tag> getAllTags() throws TagNotFoundException {
+    public List<Tag> getAllTags() {
         return tagApplicationService.findAll();
     }
 
     @GetMapping("/{tagId}")
+    @ResponseStatus(HttpStatus.OK)
     @PermitAll
     @GetArticlesByTagId
     @Operation(summary = "Get articles by tagId")

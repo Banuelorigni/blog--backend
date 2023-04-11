@@ -37,7 +37,8 @@ public class SecurityConfig {
             "/users/login",
             "/articles/all",
             "/articles/{articleId}",
-            "/tags/**",
+            "/tags/all",
+            "/tags/{tagId}",
             "/comments/{articleId}",
             "/users/register",
             "/system/health");
