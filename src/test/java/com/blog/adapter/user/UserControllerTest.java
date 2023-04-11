@@ -106,6 +106,17 @@ class UserControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(ERROR_MESSAGE_PASSWORD));
     }
 
+    @Test
+    void should_get_conflict_when_user_already_exists() throws Exception {
+        Mockito.doThrow(new UserDuplicateException(CORRECT_USERNAME)).when(userApplicationService).register(any());
+
+        mvc.perform(MockMvcRequestBuilders
+                        .post("/users/register")
+                        .content(new ObjectMapper().writeValueAsString(request))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                ).andExpect(status().isConflict())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("账号已存在: " + CORRECT_USERNAME));
+    }
 
     @Test
     void should_return_token_successfully_when_username_and_password_match() throws Exception {
@@ -160,7 +171,42 @@ class UserControllerTest {
                 .andExpect(jsonPath("$.message").value("密码不能为空"));
     }
 
+    @Test
+    void should_throw_exception_when_auth_failed() throws Exception {
+        UserLoginRequest userLoginRequest = UserLoginRequest.builder()
+                .username("username")
+                .password("wrongPassword")
+                .build();
+        Mockito.doThrow(new BadCredentialsException("Bad Credentials"))
+                .when(userApplicationService).generatePrincipal(userLoginRequest.getUsername(), userLoginRequest.getPassword());
 
+        mvc.perform(MockMvcRequestBuilders
+                        .post("/users/login")
+                        .header("platform", "portal")
+                        .content(new ObjectMapper().writeValueAsString(userLoginRequest))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isUnauthorized())
+                .andExpect(jsonPath("$.error").value(ErrorCode.LOGIN_FAILED.getMessage()))
+                .andExpect(jsonPath("$.code").value(ErrorCode.LOGIN_FAILED.getCode()))
+                .andExpect(jsonPath("$.message").value("Bad Credentials"));
+    }
+
+    @Test
+    void should_throw_authorizationException_when_header_not_have_platform() throws Exception {
+        UserLoginRequest userLoginRequest = UserLoginRequest.builder()
+                .username(CORRECT_USERNAME)
+                .password(CORRECT_PASSWORD)
+                .build();
+
+        mvc.perform(MockMvcRequestBuilders
+                        .post("/users/login")
+                        .content(new ObjectMapper().writeValueAsString(userLoginRequest))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isUnauthorized())
+                .andExpect(jsonPath("$.message").value(ErrorCode.UNKNOWN_PLATFORM.getMessage()))
+                .andExpect(jsonPath("$.code").value(ErrorCode.UNKNOWN_PLATFORM.getCode()))
+                .andExpect(jsonPath("$.error").value(ErrorCode.UNKNOWN_PLATFORM.getMessage()));
+    }
 
     @Test
     @Sql("classpath:scripts/insert_an_admin_user.sql")
