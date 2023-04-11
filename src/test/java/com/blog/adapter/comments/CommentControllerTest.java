@@ -43,8 +43,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 @AutoConfigureJsonTesters
 @Transactional
-@Sql({"classpath:scripts/insert_a_portal_user.sql",
-        "classpath:scripts/insert_articles.sql"})
 class CommentControllerTest {
     @MockBean
     private CommentApplicationService commentApplicationService;
@@ -56,6 +54,8 @@ class CommentControllerTest {
     private JacksonTester<Comment> commentJson;
 
     @Nested
+    @Sql({"classpath:scripts/insert_a_portal_user.sql",
+            "classpath:scripts/insert_articles.sql"})
     class saveComment {
         @Test
           void should_save_comment_successfully() throws Exception {
@@ -99,6 +99,8 @@ class CommentControllerTest {
     @Nested
     class GetCommentByArticleId {
         @Test
+        @Sql({"classpath:scripts/insert_a_portal_user.sql",
+                "classpath:scripts/insert_articles.sql"})
         @Sql("classpath:scripts/insert_comments.sql")
         void should_get_comments_by_article_id() throws Exception {
             Comment comment = Comment.builder().id(1L).content("test").article_id(1L).userName("portal_user").build();

@@ -1,7 +1,7 @@
 package com.blog.application.comments;
 
-import com.blog.domain.comments.Comment;
 import com.blog.adapter.comments.repository.CommentRepository;
+import com.blog.domain.comments.Comment;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,6 +15,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
+@Transactional
 class CommentApplicationServiceTest {
     @InjectMocks
     private CommentApplicationService commentApplicationService;

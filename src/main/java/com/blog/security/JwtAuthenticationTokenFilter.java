@@ -51,6 +51,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
         List<SimpleGrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(optionalUser.get().getRole().getRoleName()));
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(optionalUser.get(), null, authorities);
+        //todo
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         filterChain.doFilter(request, response);
     }
@@ -61,7 +62,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
             String token = Arrays.stream(cookies)
                     .filter(cookie -> cookie.getName().equals(SecurityConstants.TOKEN_NAME))
-                    .findFirst().orElseThrow(null).getValue();
+                    .findFirst().orElseThrow().getValue();
 
             Claims claims = jwtUtils.parseJwtToken(token);
             String id = claims.getId();
