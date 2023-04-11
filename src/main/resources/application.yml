@@ -7,8 +7,6 @@ server:
   port: 8080
 
 spring:
-  swagger:
-    enabled: true
   flyway:
     enabled: true
     baseline-on-migrate: true

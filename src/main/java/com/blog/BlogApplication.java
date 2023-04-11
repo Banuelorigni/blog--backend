@@ -7,7 +7,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 @SpringBootApplication
 @EnableJpaAuditing
-@EnableSwagger2WebMvc
 public class BlogApplication {
 
 	public static void main(String[] args) {
