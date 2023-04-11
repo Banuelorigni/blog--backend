@@ -6,6 +6,7 @@ import com.blog.adapter.comments.mapper.CommentDtoMapper;
 import com.blog.application.comments.CommentApplicationService;
 import com.blog.application.user.UserApplicationService;
 import com.blog.domain.comments.Comment;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -27,12 +28,14 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @AllArgsConstructor
 @Transactional
+@io.swagger.v3.oas.annotations.tags.Tag(name = "Comment API")
 public class CommentController {
     private final CommentApplicationService commentApplicationService;
     private final UserApplicationService userApplicationService;
 
     @PostMapping
     @GetUserIdFromCookies
+    @Operation(summary = "Save comment")
     @ResponseStatus(HttpStatus.CREATED)
     public Comment createComment(@RequestBody @Valid CreateCommentRequest commentRequest, HttpServletRequest request) {
         Long userId = (Long) request.getAttribute("userId");
@@ -44,6 +47,7 @@ public class CommentController {
 
     @GetMapping("/{articleId}")
     @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "get comments by article id")
     public Page<Comment> getCommentByArticleId(@PathVariable Long articleId,
                                                @RequestParam(required = false, defaultValue = "DESC") String orderBy,
                                                @RequestParam(required = false, defaultValue = "createdAt") String sortBy,

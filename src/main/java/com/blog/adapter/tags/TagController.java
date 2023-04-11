@@ -7,6 +7,7 @@ import com.blog.domain.tag.Tag;
 import com.blog.adapter.tags.swaggers.GetArticlesByTagId;
 import com.blog.adapter.tags.swaggers.GetTags;
 import com.blog.adapter.tags.swaggers.SaveTag;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.security.PermitAll;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -29,6 +30,7 @@ import java.util.List;
 @Validated
 @AllArgsConstructor
 @Transactional
+@io.swagger.v3.oas.annotations.tags.Tag(name = "Tag API")
 public class TagController {
     private TagApplicationService tagApplicationService;
     @PostMapping
@@ -36,6 +38,7 @@ public class TagController {
     @PermitAll
     @PreAuthorize("hasAuthority('ADMIN')")
     @SaveTag
+    @Operation(summary = "save tag")
     public Tag createTag(@RequestBody @Valid String tag) {
         return tagApplicationService.createTag(tag);
     }
@@ -44,6 +47,7 @@ public class TagController {
     @ResponseStatus(HttpStatus.OK)
     @PermitAll
     @GetTags
+    @Operation(summary = "Get all tags")
     public List<Tag> getAllTags() throws TagNotFoundException {
         return tagApplicationService.findAll();
     }
@@ -51,6 +55,7 @@ public class TagController {
     @GetMapping("/{tagId}")
     @PermitAll
     @GetArticlesByTagId
+    @Operation(summary = "Get articles by tagId")
     public List<Article> getArticlesByTagId(@PathVariable Long tagId) {
         return tagApplicationService.findArticlesByTagId(tagId);
     }
