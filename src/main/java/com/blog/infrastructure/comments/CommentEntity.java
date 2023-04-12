@@ -1,6 +1,5 @@
 package com.blog.infrastructure.comments;
 
-import com.blog.application.articles.ExcludeFromJacocoGeneratedReport;
 import com.blog.infrastructure.BaseEntity;
 import com.blog.infrastructure.articles.ArticlesEntity;
 import com.blog.infrastructure.user.entity.UserEntity;

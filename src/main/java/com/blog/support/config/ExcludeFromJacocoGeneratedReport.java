@@ -1,4 +1,4 @@
-package com.blog.application.articles;
+package com.blog.support.config;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

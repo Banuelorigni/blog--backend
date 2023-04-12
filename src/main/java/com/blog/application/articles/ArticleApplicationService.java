@@ -2,6 +2,7 @@ package com.blog.application.articles;
 
 import com.blog.adapter.articles.repository.ArticleRepository;
 import com.blog.domain.articles.Article;
+import com.blog.support.config.ExcludeFromJacocoGeneratedReport;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
