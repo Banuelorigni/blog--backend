@@ -22,18 +22,18 @@ class TagRepositoryProviderTest {
     @Autowired
     private TagRepositoryProvider tagRepositoryProvider;
 
-//    @Test
-//    @Sql({"classpath:scripts/insert_articles.sql",
-//            "classpath:scripts/insert_tags.sql",
-//            "classpath:scripts/insert_articles_tags_record.sql"
-//    })
-//    void should_find_articles_by_tag_id() {
-//        List<Article> articleList = tagRepositoryProvider.findById(1L);
-//
-//        assertEquals(1L, articleList.get(0).getId());
-//        assertEquals("article1", articleList.get(0).getTitle());
-//        assertEquals(12, articleList.get(0).getWordNumbers());
-//    }
+    @Test
+    @Sql({"classpath:scripts/insert_articles.sql",
+            "classpath:scripts/insert_tags.sql",
+            "classpath:scripts/insert_articles_tags_record.sql"
+    })
+    void should_find_articles_by_tag_id() {
+        List<Article> articleList = tagRepositoryProvider.findById(1L);
+
+        assertEquals(1L, articleList.get(0).getId());
+        assertEquals("article1", articleList.get(0).getTitle());
+        assertEquals(12, articleList.get(0).getWordNumbers());
+    }
 
     @Test
     void should_save_tag() {
@@ -52,5 +52,13 @@ class TagRepositoryProviderTest {
         assertEquals(3L, tagList.get(1).getId());
         assertEquals("spring", tagList.get(0).getName());
         assertEquals("C", tagList.get(1).getName());
+    }
+
+    @Test
+    @Sql({"classpath:scripts/insert_tags.sql"})
+    void should_find_all_tags(){
+        List<Tag> tagList = tagRepositoryProvider.findAll();
+
+        assertEquals(3,tagList.size());
     }
 }

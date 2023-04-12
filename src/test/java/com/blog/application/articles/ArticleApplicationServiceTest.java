@@ -98,13 +98,13 @@ class ArticleApplicationServiceTest {
         Page<Article> articlesReturn = articleApplicationService.getAllArticles("DESC", "createdAt", 0, 5);
 
         assertNotNull(articlesReturn);
-        assertEquals(5,    articlesReturn.getTotalElements());
-        assertEquals(1,       articlesReturn.getTotalPages());
+        assertEquals(5, articlesReturn.getTotalElements());
+        assertEquals(1, articlesReturn.getTotalPages());
         assertEquals(5, articlesReturn.getPageable().getPageSize());
     }
 
     @Test
-    void should_get_article_by_id(){
+    void should_get_article_by_id() {
         when(articleApplicationService.getArticleById(1L)).thenReturn(article1);
         Article articleReturn = articleApplicationService.getArticleById(1L);
 

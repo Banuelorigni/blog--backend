@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Component
@@ -18,21 +19,13 @@ public class TagRepositoryProvider implements TagRepository{
     @Override
     public List<Article> findById(Long tagId) {
         TagsEntity tags = jpaTagRepository.findById(tagId).orElse(null);
-        return ArticleEntityMapper.MAPPER.toListModel(tags.getArticles());
+        return ArticleEntityMapper.MAPPER.toListModel(Objects.requireNonNull(tags).getArticles());
     }
 
     @Override
     public Tag saveTag(String tag) {
         TagsEntity tagsEntity = TagEntityMapper.MAPPER.toEntity(tag);
         return TagEntityMapper.MAPPER.toModel(jpaTagRepository.save(tagsEntity));
-    }
-
-    @Override
-    public void save(List<String> tags) {
-        List<Tag> tagList = tags.stream().map(tag -> Tag.builder().name(tag).build()).toList();
-        List<TagsEntity> tagsEntities = tagList.stream().map(TagEntityMapper.MAPPER::toEntity).toList();
-
-        jpaTagRepository.saveAll(tagsEntities);
     }
 
     @Override

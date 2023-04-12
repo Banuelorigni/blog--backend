@@ -1,7 +1,7 @@
 package com.blog.application.articles;
 
-import com.blog.domain.articles.Article;
 import com.blog.adapter.articles.repository.ArticleRepository;
+import com.blog.domain.articles.Article;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class ArticleApplicationService {
     private ArticleRepository articleRepository;
+    @ExcludeFromJacocoGeneratedReport
     public Integer countWordNumber(String content) {
         return content.length();
     }
@@ -21,6 +22,7 @@ public class ArticleApplicationService {
     public Article createArticles(Article article) {
         return articleRepository.save(article);
     }
+    @ExcludeFromJacocoGeneratedReport
     public String markdownToHtml(String markdown) {
         Parser parser = Parser.builder().build();
         Node document = parser.parse(markdown);

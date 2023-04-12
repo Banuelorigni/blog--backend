@@ -1,3 +1,5 @@
+ALTER TABLE `articles` ALTER COLUMN id RESTART WITH 1;
+
 INSERT INTO `articles` (`title`, `content`, `word_numbers`, `cover_url`, `created_at`, `updated_at`, `created_by`, `updated_by`, `deleted`, `version`)
 VALUES
     ('article1', 'article test 1', 12, 'https://example.com/cover1.jpg', now(), now(), 'libingbing', 'libingbing', 0, 1),

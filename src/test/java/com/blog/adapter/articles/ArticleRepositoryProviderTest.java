@@ -20,6 +20,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @SpringBootTest(classes = BlogApplication.class)
 @ActiveProfiles("test")
@@ -77,25 +78,33 @@ class ArticleRepositoryProviderTest {
     void should_get_all_articles() {
         Page<Article> allArticles = articleRepositoryProvider.getAllArticles("DESC", "createdAt", 0, 5);
 
-        assertEquals(3,allArticles.getTotalElements());
-        assertEquals(1,allArticles.getTotalPages());
-        assertEquals(5,allArticles.getPageable().getPageSize());
+        assertEquals(3, allArticles.getTotalElements());
+        assertEquals(1, allArticles.getTotalPages());
+        assertEquals(5, allArticles.getPageable().getPageSize());
         assertNotNull(allArticles);
     }
+
+    @Test
+    void should_return_null_if_article_not_exist() {
+        Page<Article> articleById = articleRepositoryProvider.getAllArticles("DESC", "createdAt", 0, 5);
+
+        assertNull(articleById);
+    }
+
     @Test
     @Sql({"classpath:scripts/insert_articles.sql",
             "classpath:scripts/insert_tags.sql",
             "classpath:scripts/insert_articles_tags_record.sql"})
-    void should_get_article_by_id(){
+    void should_get_article_by_id() {
         Article articleById = articleRepositoryProvider.getArticleById(1L);
 
-        assertEquals(1L,articleById.getId());
-        assertEquals("article1",articleById.getTitle());
-        assertEquals(12,articleById.getWordNumbers());
-        assertEquals("article test 1",articleById.getContent());
-        assertEquals("https://example.com/cover1.jpg",articleById.getCoverUrl());
-        Assertions.assertEquals("spring",articleById.getTags().get(0).getName());
-        Assertions.assertEquals("C",articleById.getTags().get(1).getName());
+        assertEquals(1L, articleById.getId());
+        assertEquals("article1", articleById.getTitle());
+        assertEquals(12, articleById.getWordNumbers());
+        assertEquals("article test 1", articleById.getContent());
+        assertEquals("https://example.com/cover1.jpg", articleById.getCoverUrl());
+        Assertions.assertEquals("spring", articleById.getTags().get(0).getName());
+        Assertions.assertEquals("C", articleById.getTags().get(1).getName());
     }
 
 }

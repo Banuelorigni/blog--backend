@@ -1,14 +1,13 @@
 package com.blog.adapter.comments.repository;
 
-import com.blog.application.comments.exceptions.CommentNotFoundException;
 import com.blog.adapter.articles.repository.JpaArticleRepository;
-import com.blog.domain.comments.Comment;
-import com.blog.infrastructure.comments.mapper.CommentEntityMapper;
-import com.blog.infrastructure.articles.ArticlesEntity;
 import com.blog.adapter.user.repository.JpaUserRepository;
-import com.blog.infrastructure.user.entity.UserEntity;
 import com.blog.application.articles.exceptions.ArticleNotFoundException;
+import com.blog.domain.comments.Comment;
+import com.blog.infrastructure.articles.ArticlesEntity;
 import com.blog.infrastructure.comments.CommentEntity;
+import com.blog.infrastructure.comments.mapper.CommentEntityMapper;
+import com.blog.infrastructure.user.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -41,9 +40,8 @@ public class CommentRepositoryProvider implements CommentRepository {
         PageRequest pageRequest = PageRequest.of(page, size, sortDirection, sortBy);
         Page<CommentEntity> commentEntities = jpaCommentRepository.findAllByArticleId(articleId,pageRequest);
 
-        //todo
         if (commentEntities.getTotalElements() == 0) {
-            throw new CommentNotFoundException("article" + articleId + "的评论");
+            return null;
         }
 
         return commentEntities.map(CommentEntityMapper.MAPPER::toModel);

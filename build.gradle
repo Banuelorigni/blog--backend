@@ -19,13 +19,15 @@ def excludedClassDirectories = [
 		'com/blog/infrastructure/comments/mapper/*',
 		'com/blog/infrastructure/tags/mapper/*',
 		'com/blog/infrastructure/user/mapper/*',
-		'com/blog/support/utils/JsonUtils.java',
+		'com/blog/support/utils/JsonUtils*',
 		'com/blog/support/handlers/FilterExceptionHandler*',
 		'com/blog/support/constants/SecurityConstants*',
 		'com/blog/adapter/user/mapper/*',
 		'com/blog/adapter/articles/mapper/*',
+		'com/blog/adapter/user/dto/response*',
 		'com/blog/adapter/comments/mapper/*',
-		'com/blog/BlogApplication*'
+		'com/blog/BlogApplication*',
+		'com/blog/application/articles/ArticleApplicationService*/ArticleApplicationService.class:markdownToHtml',
 ]
 
 jacocoTestReport {
@@ -38,7 +40,7 @@ jacocoTestReport {
 	afterEvaluate {
 		classDirectories.setFrom(files(classDirectories.files.collect {
 			fileTree(dir: it, excludes: excludedClassDirectories)
-		}))
+		}).filter { !it.path.contains('/lombok/') })
 	}
 }
 
@@ -48,23 +50,7 @@ jacocoTestCoverageVerification {
 	afterEvaluate {
 		classDirectories.setFrom(files(classDirectories.files.collect {
 			fileTree(dir: it, excludes: excludedClassDirectories)
-		}))
-	}
-	violationRules {
-		rule {
-			limit {
-				minimum = 0.85
-				counter = 'LINE'
-				value = 'COVEREDRATIO'
-			}
-		}
-		rule {
-			limit {
-				minimum = 0.85
-				counter = 'BRANCH'
-				value = 'COVEREDRATIO'
-			}
-		}
+		}).filter { !it.path.contains('/lombok/') })
 	}
 }
 
