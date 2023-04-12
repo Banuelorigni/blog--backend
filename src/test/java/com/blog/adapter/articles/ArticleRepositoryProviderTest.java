@@ -2,9 +2,9 @@ package com.blog.adapter.articles;
 
 import com.blog.BlogApplication;
 import com.blog.adapter.articles.repository.ArticleRepositoryProvider;
+import com.blog.application.articles.exceptions.ArticleNotFoundException;
 import com.blog.domain.articles.Article;
 import com.blog.domain.tag.Tag;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +21,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest(classes = BlogApplication.class)
 @ActiveProfiles("test")
@@ -85,6 +86,15 @@ class ArticleRepositoryProviderTest {
     }
 
     @Test
+    @Sql({"classpath:scripts/insert_articles.sql"})
+    void should_sort_by_ASC() {
+        Page<Article> allArticles = articleRepositoryProvider.getAllArticles("ASC", "id", 0, 5);
+
+        assertEquals(1, allArticles.getContent().get(0).getId());
+        assertNotNull(allArticles);
+    }
+
+    @Test
     void should_return_null_if_article_not_exist() {
         Page<Article> articleById = articleRepositoryProvider.getAllArticles("DESC", "createdAt", 0, 5);
 
@@ -103,8 +113,13 @@ class ArticleRepositoryProviderTest {
         assertEquals(12, articleById.getWordNumbers());
         assertEquals("article test 1", articleById.getContent());
         assertEquals("https://example.com/cover1.jpg", articleById.getCoverUrl());
-        Assertions.assertEquals("spring", articleById.getTags().get(0).getName());
-        Assertions.assertEquals("C", articleById.getTags().get(1).getName());
+        assertEquals("spring", articleById.getTags().get(0).getName());
+        assertEquals("C", articleById.getTags().get(1).getName());
     }
 
+    @Test
+    void should_throw_ArticleNotFoundException_when_article_not_exist() {
+
+        assertThrows(ArticleNotFoundException.class, () -> articleRepositoryProvider.getArticleById(999L));
+    }
 }
