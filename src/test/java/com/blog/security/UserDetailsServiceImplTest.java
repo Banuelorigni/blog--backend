@@ -24,7 +24,7 @@ class UserDetailsServiceImplTest {
     private UserDetailsServiceImpl userDetailsServiceImpl;
 
     @Test
-    void shouldReturnUserDetailsCorrectly() {
+    void should_return_user_details_correctly() {
         String username = "username";
         RoleEntity role = RoleEntity.builder().id(2L).roleName("ADMIN").build();
         UserEntity userEntity = new UserEntity(1L, role, username, "password", username,null);
@@ -43,7 +43,7 @@ class UserDetailsServiceImplTest {
     }
 
     @Test
-    void shouldReturnUserDetailsCorrectlyWhenEnableIsFalse() {
+    void should_return_user_details_correctly_when_enable_is_false() {
         String username = "username";
         RoleEntity role = RoleEntity.builder().id(2L).roleName("PORTAL_USER").build();
         UserEntity userEntity = new UserEntity(1L, role, username, "password", username,null);
@@ -63,7 +63,7 @@ class UserDetailsServiceImplTest {
     }
 
     @Test
-    void shouldThrowUsernameNotFoundExceptionWhenUserDetailsIsNull() {
+    void should_throw_username_not_found_exception_when_user_details_is_null() {
         String username = "username";
         when(userRepository.findByUsername(username)).thenReturn(Optional.empty());
 

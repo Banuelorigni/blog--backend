@@ -43,7 +43,7 @@ class UserApplicationServiceTest {
     private final UserApplicationService userApplicationService = new UserApplicationService(userRepository, authenticationManager, jwtUtils, passwordEncoder);
 
     @Test
-    void shouldSaveUserWhenRegisterUserNotExist() {
+    void should_save_user_when_register_user_not_exist() {
         String username = "testUsername";
         String password = "P@ssword1";
         String encryptedPassword = "encryptedPassword";
@@ -58,7 +58,7 @@ class UserApplicationServiceTest {
     }
 
     @Test
-    void shouldThrowUserDuplicateExceptionWhenUserExist() {
+    void should_throw_user_duplicate_exception_when_user_exist() {
         String username = "testUsername";
         String password = "P@ssword1";
         User user = User.builder().username(username).password(password).build();
@@ -69,7 +69,7 @@ class UserApplicationServiceTest {
     }
 
     @Test
-    void shouldReturnCorrectToken() {
+    void should_return_correct_token() {
         UserPrincipalInfo userPrincipalInfo = UserPrincipalInfo.builder()
                 .userEntity(new UserEntity(1L, RoleEntity.builder().id(1L).roleName("GENERAL_USER").build(), "correctUsername", "correct_password", "test",null))
                 .build();
@@ -81,7 +81,7 @@ class UserApplicationServiceTest {
     }
 
     @Test
-    void shouldThrowAuthorizationExceptionWhenRoleIsNull() {
+    void should_throw_authorization_exception_when_role_is_null() {
         UserPrincipalInfo userPrincipalInfo = UserPrincipalInfo.builder()
                 .userEntity(UserEntity.builder().id(1L).username("wrong").password("correct_password").nickname("test").build())
                 .build();
@@ -93,7 +93,7 @@ class UserApplicationServiceTest {
     }
 
     @Test
-    void shouldReturnUserPrincipalInfoCorrectly() {
+    void should_return_user_principal_info_correctly() {
         String username = "username";
         String password = "password";
         UserPrincipalInfo userPrincipalInfo = UserPrincipalInfo.builder()
@@ -113,7 +113,7 @@ class UserApplicationServiceTest {
     }
 
     @Test
-    void shouldReturnUserPrincipalInfoCorrectlyOptional() {
+    void should_return_user_principal_info_correctly_optional() {
         String username = "username";
         String password = "password";
         UserPrincipalInfo userPrincipalInfo = UserPrincipalInfo.builder()
@@ -129,7 +129,7 @@ class UserApplicationServiceTest {
     }
 
     @Test
-    void shouldReturnUserPrincipalInfoWrong() {
+    void should_return_user_principal_info_wrong() {
         String username = "username";
         String password = "password";
         when(authenticationManager.authenticate(any())).thenReturn(null);
@@ -141,7 +141,7 @@ class UserApplicationServiceTest {
     }
 
     @Test
-    void shouldThrowBadCredentialExceptionWhenPasswordIsWrong() {
+    void should_throw_bad_credential_exception_when_password_is_wrong() {
         String username = "username";
         String password = "wrongPassword";
         doThrow(new BadCredentialsException("Bad Credentials")).when(authenticationManager).authenticate(any());
@@ -153,7 +153,7 @@ class UserApplicationServiceTest {
     }
 
     @Test
-    void shouldThrowAuthorizationExceptionWhenRoleNotMatch() {
+    void should_throw_authorization_exception_when_role_not_match() {
         UserEntity adminUser = new UserEntity(1L, RoleEntity.builder().id(1L).roleName("GENERAL_USER").build(), "correctUsername", "correct_password", "test",null);
         UserPrincipalInfo adminUserPrincipal = UserPrincipalInfo.builder()
                 .userEntity(adminUser)
@@ -166,7 +166,7 @@ class UserApplicationServiceTest {
     }
 
     @Test
-    void shouldReturnUserListSuccess() {
+    void should_return_user_list_success() {
         User user1 = User.builder()
                 .id(1L)
                 .nickname("portal_user1")

@@ -21,7 +21,7 @@ class JwtUtilsTest {
     }
 
     @Test
-    void shouldCreateJwtTokenAndParseJwtToken() {
+    void should_create_jwt_token_and_parse_jwt_token() {
         String jwtToken = jwtUtils.createJwtToken(1L, "test_role", "test_username");
         Claims claims = jwtUtils.parseJwtToken(jwtToken);
 
@@ -31,7 +31,7 @@ class JwtUtilsTest {
     }
 
     @Test
-    void shouldGetUserIdFromCookiesCorrectly() {
+    void should_get_user_id_from_cookies_correctly() {
 
         String jwtToken = jwtUtils.createJwtToken(1L, "test_role", "test_username");
 

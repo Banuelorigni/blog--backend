@@ -27,6 +27,6 @@ public enum RoleEnum {
         return Arrays.stream(values())
                 .filter(value -> value.getByPlatformName().equals(platformName))
                 .findFirst()
-                .orElseGet(null);
+                .orElse(null);
     }
 }

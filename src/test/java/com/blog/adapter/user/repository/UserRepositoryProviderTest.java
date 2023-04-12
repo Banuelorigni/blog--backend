@@ -35,18 +35,18 @@ class UserRepositoryProviderTest {
     private UserRepositoryProvider userRepositoryProvider;
 
     @Test
-    void shouldReturnFalseWhenNotExists() {
+    void should_return_false_when_not_exists() {
         assertFalse(userRepositoryProvider.exist("username"));
     }
 
     @Test
     @Sql("classpath:scripts/insert_an_admin_user.sql")
-    void shouldReturnTrueWhenExists() {
+    void should_return_true_when_exists() {
         assertTrue(userRepositoryProvider.exist("libingbing"));
     }
 
     @Test
-    void shouldReturnNullWhenFindByIdButNone() {
+    void should_return_null_when_find_by_id_but_none() {
         Optional<UserEntity> userEntity = userRepositoryProvider.findById(1L);
 
         assertFalse(userEntity.isPresent());
@@ -54,7 +54,7 @@ class UserRepositoryProviderTest {
 
     @Test
     @Sql("classpath:scripts/insert_admin_role.sql")
-    void shouldSaveUserCorrectly() {
+    void should_save_user_correctly() {
         User user = new User();
         user.setUsername("username");
         user.setPassword("encryptedPassword");
@@ -80,7 +80,7 @@ class UserRepositoryProviderTest {
 
     @Test
     @Sql("classpath:scripts/insert_an_admin_user.sql")
-    void shouldReturnUserEntityWhenFindById() {
+    void should_return_user_entity_when_find_by_id() {
         UserEntity userEntity = userRepositoryProvider.findById(1L).orElseThrow();
 
         assertEquals(1L, userEntity.getId());
@@ -92,7 +92,7 @@ class UserRepositoryProviderTest {
     }
 
     @Test
-    void shouldReturnNullWhenFindByUsernameButNone() {
+    void should_return_null_when_find_by_username_but_none() {
         Optional<UserEntity> userEntity = userRepositoryProvider.findByUsername("libingbing");
 
         assertFalse(userEntity.isPresent());
@@ -100,7 +100,7 @@ class UserRepositoryProviderTest {
 
     @Test
     @Sql("classpath:scripts/insert_an_admin_user.sql")
-    void shouldReturnUserEntityWhenFindByUsername() {
+    void should_return_user_entity_when_find_by_username() {
         UserEntity userEntity = userRepositoryProvider.findByUsername("libingbing").orElseThrow();
 
         assertEquals(1L, userEntity.getId());
