@@ -3,7 +3,6 @@ package com.blog.adapter.tags;
 import com.blog.adapter.tags.swaggers.GetArticlesByTagId;
 import com.blog.adapter.tags.swaggers.GetTags;
 import com.blog.application.tags.TagApplicationService;
-import com.blog.application.tags.exceptions.TagNotFoundException;
 import com.blog.domain.articles.Article;
 import com.blog.domain.tag.Tag;
 import io.swagger.v3.oas.annotations.Operation;

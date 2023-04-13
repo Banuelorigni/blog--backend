@@ -1,7 +1,7 @@
 package com.blog.infrastructure.tags;
 
-import com.blog.infrastructure.articles.ArticlesEntity;
 import com.blog.infrastructure.BaseEntity;
+import com.blog.infrastructure.articles.ArticlesEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

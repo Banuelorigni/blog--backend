@@ -1,8 +1,8 @@
 package com.blog.application.tags;
 
+import com.blog.adapter.tags.repository.TagRepository;
 import com.blog.domain.articles.Article;
 import com.blog.domain.tag.Tag;
-import com.blog.adapter.tags.repository.TagRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -2,8 +2,8 @@ package com.blog.adapter.articles.repository;
 
 import com.blog.application.articles.exceptions.ArticleNotFoundException;
 import com.blog.domain.articles.Article;
-import com.blog.infrastructure.articles.mapper.ArticleEntityMapper;
 import com.blog.infrastructure.articles.ArticlesEntity;
+import com.blog.infrastructure.articles.mapper.ArticleEntityMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

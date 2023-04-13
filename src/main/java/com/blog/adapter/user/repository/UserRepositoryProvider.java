@@ -1,10 +1,10 @@
 package com.blog.adapter.user.repository;
 
+import com.blog.adapter.user.mapper.UserDtoMapper;
 import com.blog.domain.user.User;
 import com.blog.infrastructure.user.entity.RoleEntity;
-import com.blog.infrastructure.user.mapper.UserEntityMapper;
-import com.blog.adapter.user.mapper.UserDtoMapper;
 import com.blog.infrastructure.user.entity.UserEntity;
+import com.blog.infrastructure.user.mapper.UserEntityMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -1,7 +1,7 @@
 package com.blog.application.comments;
 
-import com.blog.domain.comments.Comment;
 import com.blog.adapter.comments.repository.CommentRepository;
+import com.blog.domain.comments.Comment;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;

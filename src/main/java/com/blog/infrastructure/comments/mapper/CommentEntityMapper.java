@@ -1,9 +1,9 @@
 package com.blog.infrastructure.comments.mapper;
 
-import com.blog.infrastructure.articles.ArticlesEntity;
-import com.blog.infrastructure.user.entity.UserEntity;
 import com.blog.domain.comments.Comment;
+import com.blog.infrastructure.articles.ArticlesEntity;
 import com.blog.infrastructure.comments.CommentEntity;
+import com.blog.infrastructure.user.entity.UserEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
