@@ -116,3 +116,7 @@ tasks.named('test') {
 test {
 	finalizedBy jacocoTestReport
 }
+
+bootJar {
+	archiveFileName = "blog.jar"
+}
